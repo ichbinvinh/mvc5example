@@ -1,0 +1,160 @@
+﻿@using MvcMesswert.Models
+@model MyViewModel
+
+    
+@*@{
+Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+
+@*@model IEnumerable<MvcMesswert.Models.Messwert>*@
+
+@{
+    ViewBag.Title = "Index";
+ }
+
+
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Hour: @Html.TextBox("hourFilter") 
+        Template: @Html.DropDownList("template", "All")
+        OrderBy: @Html.DropDownList("orderBy", "All")
+        GroupBy: @Html.DropDownList("groupBy", "None")
+        <br />
+        <input type="submit" value="Filter" />
+    </p>
+}
+
+ 
+
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Time)*@
+            Time
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Template)*@
+            Template
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Value)*@
+            Value
+        </th>
+        <th></th>
+    </tr>
+        @if (Model.TypeDecimal != null) 
+        { 
+
+            foreach (var groupitem in Model.TypeDecimal)
+            {
+                <tr><th colspan="3">@groupitem.Key</th></tr>
+                foreach (var item in groupitem.Values)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Template)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+                }
+            }
+        }
+        
+    @if (Model.TypeDatetime != null)
+    {
+
+        foreach (var groupitem in Model.TypeDatetime)
+        {
+            <tr><th colspan="3">@groupitem.Key</th></tr>
+            foreach (var item in groupitem.Values)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Template)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+        }
+    }
+
+    @if (Model.TypeString != null)
+    {
+
+        foreach (var groupitem in Model.TypeString)
+        {
+            <tr><th colspan="3">@groupitem.Key</th></tr>
+            foreach (var item in groupitem.Values)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Template)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+        }
+    }
+
+    @if(Model.TypeMesswert != null)
+    {       
+     
+        foreach (var item in Model.TypeMesswert) {
+   
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Template)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+                    </td>
+                </tr>
+            }
+    }
+</table>
